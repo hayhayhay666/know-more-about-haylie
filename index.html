@@ -5,22 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="creative-medium" content="interactive-prototype" />
   <title>Haylie Chau — Climate · Finance · Energy Advisory</title>
-  <link rel="stylesheet" href="css/styles.css" />
-  <script src="https://sf3-scmcdn-cn.feishucdn.com/obj/feishu-static/miaoda/coding-unpkg-sdk/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
-  <script src="https://sf3-scmcdn-cn.feishucdn.com/obj/feishu-static/miaoda/coding-unpkg-sdk/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
-  <script src="https://sf3-scmcdn-cn.feishucdn.com/obj/feishu-static/miaoda/coding-unpkg-sdk/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js" crossorigin="anonymous"></script>
 </head>
 <body>
   <div id="root"></div>
+
   <script type="text/babel" data-inlined-from="js/animations.jsx">
 // ============================================
 // Scroll-triggered animation hooks
-// Apple-inspired: fade in, translate up, letter-spacing transitions
 // ============================================
 
 const { useState, useEffect, useRef } = React;
 
-// Hook: observe an element and return whether it's in view
 function useInView(options = {}) {
   const ref = useRef(null);
   const [inView, setInView] = useState(false);
@@ -54,7 +53,6 @@ function useInView(options = {}) {
   return [ref, inView];
 }
 
-// Hook: scroll-based parallax offset
 function useParallax(speed = 0.3) {
   const ref = useRef(null);
   const [offset, setOffset] = useState(0);
@@ -89,7 +87,6 @@ function useParallax(speed = 0.3) {
   return [ref, offset];
 }
 
-// Hook: nav scroll state
 function useNavScroll(threshold = 200) {
   const [scrolled, setScrolled] = useState(false);
 
@@ -112,7 +109,6 @@ function useNavScroll(threshold = 200) {
   return scrolled;
 }
 
-// Lightbox context-like component (simple)
 function Lightbox({ image, caption, onClose, rotate }) {
   useEffect(() => {
     if (image) {
@@ -154,16 +150,16 @@ function Lightbox({ image, caption, onClose, rotate }) {
 }
 
 Object.assign(window, { useInView, useParallax, useNavScroll, Lightbox });
+  </script>
 
-</script>
   <script type="text/babel" data-inlined-from="js/data.js">
 // ============================================
 // Portfolio data — Journey timeline structure
 // ============================================
 
-const IMG_PORTRAIT = "./images/aadkxpdiwroou_ve_miaoda-fdc527f9.png";
-const IMG_HERO_BG = "assets/images/journey-mountain.jpg";
-const IMG_DOOMSDAY_BG = "assets/images/journey-mountain.jpg";
+const IMG_PORTRAIT = "thumbnail.png";
+const IMG_HERO_BG = "journey-mountain.jpg";
+const IMG_DOOMSDAY_BG = "journey-mountain.jpg";
 
 const HERO_DATA = {
   eyebrow: "Haylie Chau · Hiu Ying CHAU",
@@ -174,11 +170,7 @@ const HERO_DATA = {
   bgImage: IMG_HERO_BG
 };
 
-// ===== Journey Timeline =====
-// Each chapter: era, title, tagline, keywords[], type ("hero"|"text"|"photo-grid"|"no-photo"),
-// heroImage + heroCaption (for hero type), images[] (for photo-grid type), metrics[]
 const JOURNEY_DATA = [
-  // 01 — Doomsday Clock (full-bleed image + quote)
   {
     era: "01 · Starting Point",
     title: "Doomsday Clock",
@@ -188,8 +180,6 @@ const JOURNEY_DATA = [
     heroCaption: "The thought that started it all",
     reverse: true
   },
-
-  // 02 — Two Suitcases
   {
     era: "02 · Turning Point",
     title: "Two Suitcases",
@@ -200,12 +190,10 @@ const JOURNEY_DATA = [
       { value: "London", label: "Is now my home" }
     ],
     type: "photo",
-    heroImage: "assets/images/journey-coffee.jpg",
+    heroImage: "journey-coffee.jpg",
     heroCaption: "Best coffee in London",
     reverse: false
   },
-
-  // 03 — UCL (undergrad + dissertation)
   {
     era: "03 · Undergrad",
     title: "UCL — Earth Sciences",
@@ -215,24 +203,20 @@ const JOURNEY_DATA = [
       { value: "74.11", label: "Final score" }
     ],
     type: "photo",
-    heroImage: "assets/images/ucl-dissertation.jpg",
+    heroImage: "ucl-dissertation.jpg",
     heroCaption: "Dissertation report — GEOL0014",
     reverse: false
   },
-
-  // 04 — Imperial (current)
   {
     era: "04 · Current Chapter",
     title: "Imperial College",
     tagline: "MSc Climate Change, Management & Finance, where the science meets capital and business decisions. To be continued ...",
     keywords: ["Energy Systems", "Finance", "Strategy"],
     type: "photo",
-    heroImage: "assets/images/imperial-business-school.jpg",
+    heroImage: "imperial-business-school.jpg",
     heroCaption: "Imperial College Business School",
     reverse: true
   },
-
-  // 05 — HKPC (CarbonSorb + food waste)
   {
     era: "05 · Policy and Tech · HKPC",
     title: "CarbonSorb & Food TranSmarter",
@@ -243,53 +227,47 @@ const JOURNEY_DATA = [
       { value: "Won the deck presentation", label: "amongst 6 groups of interns" }
     ],
     type: "photo-grid",
-    heroImage: "assets/images/hkpc-prototype.jpg",
+    heroImage: "hkpc-prototype.jpg",
     heroCaption: "Photo of the desktop prototype @HKPC",
     images: [
-      { src: "assets/images/hkpc-group.jpg", caption: "Group photo @HKPC" },
-      { src: "assets/images/hkpc-foodtrans.jpg", caption: "Working with the Food TranSmarter @HKPC", rotate: 90 },
-      { src: "assets/images/hkpc-elderly.jpg", caption: "Promoting the Food TranSmarter to an elderly in an estate @HKPC" },
-      { src: "assets/images/hkpc-present.jpg", caption: "Presenting our prototype to our general managers @HKPC", rotate: 90 },
-      { src: "assets/images/hkpc-award.jpg", caption: "We won the deck presentation amongst 6 groups of interns @HKPC" }
+      { src: "hkpc-group.jpg", caption: "Group photo @HKPC" },
+      { src: "hkpc-foodtrans.jpg", caption: "Working with the Food TranSmarter @HKPC", rotate: 90 },
+      { src: "hkpc-elderly.jpg", caption: "Promoting the Food TranSmarter to an elderly in an estate @HKPC" },
+      { src: "hkpc-present.jpg", caption: "Presenting our prototype to our general managers @HKPC", rotate: 90 },
+      { src: "hkpc-award.jpg", caption: "We won the deck presentation amongst 6 groups of interns @HKPC" }
     ],
     reverse: true
   },
-
-  // 06 — Fugro
   {
     era: "06 · Geotechnical · Fugro",
     title: "Landslide Risk Assessment",
     tagline: "Conducted field inspections, slope hazard assessments, and trial pit logging to generate reports in ArcGIS, which are presented to the Hong Kong Civil Engineering & Development Department to plan hard engineering work.",
     keywords: ["Fieldwork", "ArcGIS", "Soil Logging", "Landslide Modelling"],
     type: "photo-grid",
-    heroImage: "assets/images/fugro-slope1.jpg",
+    heroImage: "fugro-slope1.jpg",
     heroCaption: "Slope mapping @Fugro",
     images: [
-      { src: "assets/images/fugro-slope2.jpg", caption: "Slope mapping @Fugro" },
-      { src: "assets/images/fugro-soil.jpg", caption: "Soil logging @Fugro" },
-      { src: "assets/images/fugro-landslide.jpg", caption: "Landslide modelling @Fugro" },
-      { src: "assets/images/fugro-trialpit.jpg", caption: "Trial pit logging @Fugro" }
+      { src: "fugro-slope2.jpg", caption: "Slope mapping @Fugro" },
+      { src: "fugro-soil.jpg", caption: "Soil logging @Fugro" },
+      { src: "fugro-landslide.jpg", caption: "Landslide modelling @Fugro" },
+      { src: "fugro-trialpit.jpg", caption: "Trial pit logging @Fugro" }
     ],
     reverse: false
   },
-
-  // 07 — WGO
   {
     era: "07 · Community · WGO",
     title: "Source Reduction Education",
     tagline: "Ran booths and Green Walk events for World Green Organisation — discovered most people don't even know basic recycling rules.",
     keywords: ["Community Engagement", "Public Education", "Event Coordination"],
     type: "photo-grid",
-    heroImage: "assets/images/wgo-greenwalk-v3.jpg",
+    heroImage: "wgo-greenwalk-v3.jpg",
     heroCaption: "Green Walk 2022 @WGO",
     images: [
-      { src: "assets/images/wgo-group.jpg", caption: "Group photo @WGO" },
-      { src: "assets/images/wgo-stall.jpg", caption: "Hosting stall games @WGO", rotate: 90 }
+      { src: "wgo-group.jpg", caption: "Group photo @WGO" },
+      { src: "wgo-stall.jpg", caption: "Hosting stall games @WGO", rotate: 90 }
     ],
     reverse: true
   },
-
-  // 08 — Headstart
   {
     era: "08 · Consulting · Headstart",
     title: "Restaurant Sustainability Scoring",
@@ -298,8 +276,6 @@ const JOURNEY_DATA = [
     type: "no-photo",
     reverse: false
   },
-
-  // 09 — UCL Energy Society / G3 Summit
   {
     era: "09 · Leadership · UCL Energy Society",
     title: "G3 Energy Summit",
@@ -311,15 +287,13 @@ const JOURNEY_DATA = [
       { value: "3 unis", label: "Cross-institutional" }
     ],
     type: "photo-grid",
-    heroImage: "assets/images/energy-society1.jpg",
+    heroImage: "energy-society1.jpg",
     heroCaption: "Society networking events with UCL Energy Society",
     images: [
-      { src: "assets/images/energy-society2.jpg", caption: "Society networking events with UCL Energy Society" }
+      { src: "energy-society2.jpg", caption: "Society networking events with UCL Energy Society" }
     ],
     reverse: true
   },
-
-  // 10 — Energy Advisory (future direction)
   {
     era: "10 · Future",
     title: "Energy Advisory",
@@ -330,7 +304,6 @@ const JOURNEY_DATA = [
   }
 ];
 
-// ===== Skills =====
 const SKILLS_DATA = [
   {
     number: "01",
@@ -349,7 +322,6 @@ const SKILLS_DATA = [
   }
 ];
 
-// ===== Expectations (added from food waste reflection) =====
 const EXPECTATIONS_DATA = [
   {
     label: "What I expect from energy work",
@@ -365,7 +337,6 @@ const EXPECTATIONS_DATA = [
 
 const TRAITS = ["Pragmatic", "Fast learner", "Honest self-assessment"];
 
-// ===== Contact =====
 const CONTACT_DATA = {
   title: "Energy advisory",
   subtitle: "Looking for meaningful roles where I can make a change.",
@@ -377,8 +348,8 @@ Object.assign(window, {
   HERO_DATA, JOURNEY_DATA, SKILLS_DATA, EXPECTATIONS_DATA, TRAITS, CONTACT_DATA,
   IMG_PORTRAIT, IMG_HERO_BG, IMG_DOOMSDAY_BG
 });
+  </script>
 
-</script>
   <script type="text/babel" data-inlined-from="js/sections.jsx">
 // ============================================
 // Sections — unified Journey timeline
@@ -386,7 +357,6 @@ Object.assign(window, {
 
 const { useRef, useEffect, useState } = React;
 
-// --- Nav ---
 function Nav() {
   const [scrolled, setScrolled] = useState(false);
 
@@ -410,7 +380,6 @@ function Nav() {
   );
 }
 
-// --- Hero Section ---
 function HeroSection() {
   const [ref, inView] = useInView({ threshold: 0.1, rootMargin: "0px" });
   const [letterSpacing, setLetterSpacing] = React.useState("0.02em");
@@ -494,9 +463,6 @@ function HeroSection() {
   );
 }
 
-// ============================================
-// Journey Section — unified timeline
-// ============================================
 function JourneySection() {
   const [titleRef, titleVisible] = useInView({ threshold: 0.3 });
   const [subtitleRef, subtitleVisible] = useInView({ threshold: 0.3 });
@@ -559,7 +525,6 @@ function JourneyChapter({ chapter, index }) {
       className={`journey-chapter ${chapter.type} ${inView ? "visible" : ""} ${chapter.reverse ? "reverse" : ""}`}
       style={{ transitionDelay: `${index * 0.03}s` }}
     >
-      {/* Left: content */}
       <div className="journey-content">
         <span className="journey-era">{chapter.era}</span>
         <h3 className="journey-title">{chapter.title}</h3>
@@ -585,7 +550,6 @@ function JourneyChapter({ chapter, index }) {
         )}
       </div>
 
-      {/* Right: visual */}
       <div className="journey-visual">
         {(chapter.type === "photo" || chapter.type === "photo-grid") && (
           <div
@@ -620,14 +584,7 @@ function JourneyChapter({ chapter, index }) {
           </div>
         )}
 
-        {chapter.type === "text" && (
-          <div className="journey-text-visual">
-            <div className="journey-text-visual-number">{chapter.era.split(" ")[0]}</div>
-            <div className="journey-text-visual-line"></div>
-          </div>
-        )}
-
-        {chapter.type === "no-photo" && (
+        {(chapter.type === "text" || chapter.type === "no-photo") && (
           <div className="journey-text-visual">
             <div className="journey-text-visual-number">{chapter.era.split(" ")[0]}</div>
             <div className="journey-text-visual-line"></div>
@@ -638,9 +595,6 @@ function JourneyChapter({ chapter, index }) {
   );
 }
 
-// ============================================
-// Skills Section
-// ============================================
 function SkillsSection() {
   const [titleRef, titleVisible] = useInView({ threshold: 0.3 });
   const [subtitleRef, subtitleVisible] = useInView({ threshold: 0.3 });
@@ -661,7 +615,6 @@ function SkillsSection() {
           ))}
         </div>
 
-        {/* Expectations cards */}
         <div className="expectations-grid">
           {EXPECTATIONS_DATA.map((item, i) => (
             <ExpectationCard key={i} item={item} index={i} />
@@ -708,9 +661,6 @@ function ExpectationCard({ item, index }) {
   );
 }
 
-// ============================================
-// Contact Section
-// ============================================
 function ContactSection() {
   const [ref, inView] = useInView({ threshold: 0.3 });
 
@@ -736,19 +686,13 @@ function ContactSection() {
   );
 }
 
-// ============================================
-// Lightbox
-// ============================================
 function openLightbox(src, caption, rotate) {
   const evt = new CustomEvent("openLightbox", { detail: { src, caption, rotate } });
   window.dispatchEvent(evt);
 }
 
-// ============================================
-// App — root
-// ============================================
 function App() {
-  const [lightbox, setLightbox] = useState({ img: null, cap: null });
+  const [lightbox, setLightbox] = useState({ img: null, cap: null, rot: null });
 
   useEffect(() => {
     function onOpen(e) {
@@ -759,7 +703,7 @@ function App() {
   }, []);
 
   function closeLightbox() {
-    setLightbox({ img: null, cap: null });
+    setLightbox({ img: null, cap: null, rot: null });
   }
 
   return (
@@ -776,7 +720,6 @@ function App() {
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<App />);
-
-</script>
+  </script>
 </body>
 </html>
